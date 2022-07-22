@@ -20,11 +20,17 @@ public class FrankFactoryBean implements FactoryBean {
     // UserMapper,OrderMapper
     private Class mapperClass;
 
-
+    /**
+     *  传入需要代理的mapper接口的class，然后在getObject方法中让mybatis生成对应的mapper接口的代理对象
+      */
     public FrankFactoryBean(Class mapperClass) {
         this.mapperClass = mapperClass;
     }
 
+    /**
+     * 从ioc容器中拿到factory 因为在AppConfig中直接Import的所以可以用到ioc容器，即使这个类不在包扫描范围内
+     * @param factory
+     */
     @Autowired
     public void setSqlSession(SqlSessionFactory factory) {
         factory.getConfiguration().addMapper(mapperClass);
@@ -38,7 +44,7 @@ public class FrankFactoryBean implements FactoryBean {
      */
     @Override
     public Object getObject() throws Exception {
-
+        // 让mybatis生成对应的mapper接口的代理对象
         Object mapper = sqlSession.getMapper(mapperClass);
         return mapper;
     }

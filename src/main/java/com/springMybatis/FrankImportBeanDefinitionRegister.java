@@ -43,7 +43,5 @@ public class FrankImportBeanDefinitionRegister implements ImportBeanDefinitionRe
             }
         });
         frankScanner.scan(path);
-
-
     }
 }

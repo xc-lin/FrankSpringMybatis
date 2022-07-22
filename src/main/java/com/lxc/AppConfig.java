@@ -18,13 +18,10 @@ import java.io.InputStream;
 @ComponentScan("com.lxc")
 @FrankMapperScan("com.lxc.mapper")
 public class AppConfig {
-
-
     @Bean
     public SqlSessionFactory sqlSessionFactory() throws IOException {
         InputStream resourceAsStream = Resources.getResourceAsStream("mybatis.xml");
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(resourceAsStream);
-
         return factory;
     }
 }
